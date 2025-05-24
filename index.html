@@ -1,0 +1,474 @@
+<!--index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link href="./styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="./images/Ritmichell.png">
+    <title>Ritmichell - Gestión y control de productos</title>
+    
+    </head>
+    <body>
+    <div id="notification-container" class="notification-container"></div>
+    <div id="login-container" class="container">
+        <form class="login-form">
+            <img src="./images/Ritmichell.png" alt="Logo" class="logo">
+            <h2>LOGIN</h2>
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" class="form-control" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" class="form-control" autocomplete="current-password">
+            </div>
+            <button type="button" id="login-btn" class="btn-primary">Iniciar Sesión</button>
+        </form>
+        <center><div id="error-message" class="error-message hidden"></div></center>
+    </div>
+
+
+
+<div id="main-container" class="container hidden scrollable-container">
+
+
+        <div class="menu-bar">
+            <img src="images/Ritmichell.png" width="80px" height="80px" >
+    <button id="logout-btn" class="grid-button">
+    <img src="images/logout.png" alt="Cerrar Sesión" width="30px" height="30px">
+    <br>
+    <span>Cerrar Sesión</span>
+</button>
+        </div>
+
+<br>
+<br>
+<center>
+    <div class="grid-container">
+
+        <button id="gestion-productos-btn" class="grid-button">
+            <img src="images/files.png" alt="Gestión de Productos">
+            <br>
+            <span>Gestión de Productos</span>
+        </button>
+        <button id="add-colegio-btn" class="grid-button hidden">
+            <img src="images/colegio.png" alt="Colegio">
+            <br>
+            <span>Agregar Colegio</span>
+        </button>
+        <button id="cost-control-btn" class="grid-button ">
+            <img src="images/costos.png" alt="Control de Costos">
+            <br>
+            <span>Costos</span>
+        </button>
+        
+        <button id="reports-btn" class="grid-button">
+            <img src="images/info.png" alt="Reportes">
+            <br>
+            <span>Reportes</span>
+        </button>
+        
+        
+    </div>
+</center>
+<br>
+</div>
+
+
+    
+<div id="products-container" class="container hidden scrollable-container">
+    <div class="menu-bar">
+        <div class="left-menu">
+            <button id="back-to-menu" class="btn-primary">Volver al menu</button>
+        </div>
+        <button id="logout-btn-inv" class="grid-button">
+            <img src="images/logout.png" alt="Cerrar Sesión" width="30px" height="30px">
+            <br>
+            <span>Cerrar Sesión</span>
+        </button>
+    </div>
+    <h2>Inventario de Productos</h2>
+    <br>
+    <button id="add-product-btn" class="grid-button  hidden">
+            <img src="images/agregar-producto.png" alt="Agregar Producto">
+            <br>
+            <span>Agregar Producto</span>
+        </button>
+        <button id="update-stock-btn" class="grid-button ">
+            <img src="images/actualizar-producto.png" alt="Actualizar Stock">
+            <br>
+            <span>Actualizar Stock</span>
+        </button>
+        <br>
+    <br>
+    <br>
+    <div class="search-bar">
+        <input type="text" id="search-input" class="form-control" placeholder="Buscar Colegio o Producto">
+        <button id="clear-search-btn" class="btn-secondary"><img src="images/delete.png" height="20px" width="20px"></button>
+        <div id="suggestions-container" class="suggestions hidden"></div>
+    </div>
+    <div class="products-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Colegio</th>
+                    <th>Categoria</th>
+                    <th>Prenda</th>
+                    <th>Talla</th>
+                    <th>Cantidad</th>
+                    <th>Actualizar/Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="products-body"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="colegios-container" class="container hidden">
+    
+    <h2>Colegios</h2>
+    
+    
+</div>
+
+
+
+
+
+<div id="stock-alert" class="alert hidden"></div>
+
+
+<div id="cost-control-container" class="container hidden scrollable-container">
+    <div class="menu-bar">
+        <div class="left-menu">
+            <button id="back-to-inventory-btn" class="btn-primary">Volver al menú</button>
+        </div>
+        <button id="logout-from-cost-btn" class="grid-button">
+            <img src="images/logout.png" alt="Cerrar Sesión" width="30px" height="30px">
+            <br>
+            <span>Cerrar Sesión</span>
+        </button>
+    </div>
+    <h2>Control de Costos de Producción</h2>
+
+    <div class="cost-input-form">
+        <h3>Costos por Producto</h3>
+        <div class="form-group">
+            <label>Producto:</label>
+            <select id="product-selector" class="form-control">
+                <option value="">Seleccionar Producto</option>
+                <option value="sudadera">Sudadera</option>
+                <option value="chaqueta">Chaqueta</option>
+                <option value="pantalon">Pantalón</option>
+                <option value="falda">Falda/Jardinera</option>
+                <option value="blaizer">Blaizer</option>
+                <option value="camisa">Camisa cuello corbata</option>
+                <option value="tejidos">Tejidos (busos, chalecos)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Talla:</label>
+            <select id="size-selector" class="form-control">
+                <option value="">Seleccionar Talla</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Costo de Producción:</label>
+            <input type="number" id="cost-production" class="form-control" placeholder="Ingrese el costo de producción">
+        </div>
+        <div class="cost-filters">
+            <div class="form-group">
+                <label>Costo Variable:</label>
+                <br>
+                <input type="checkbox" id="has-variable-cost"> ¿Hay costo variable?
+                <input type="number" id="cost-variable" class="form-control hidden" placeholder="Ingrese el costo variable">
+            </div>
+        </div>
+        <div class="cost-summary">
+            <h3>Resumen de Costos</h3>
+            <p>Precio de Venta: <span id="show-selling-price">0</span></p>
+            <p>Rentabilidad: <span id="profitability">0</span></p>
+        </div>
+        <br>
+        <button id="calculate-price-btn" class="btn-primary">Conocer Precio de Venta</button>
+        <br><br>
+        <button id="save-cost-btn" class="btn-primary" disabled>Guardar Costos</button>
+    </div>
+    <br>
+    <!-- Tabla de Historial de Costos -->
+    <h2>Historial de Costos</h2>
+    <div class="cost-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Talla</th>
+                    <th>Costo de Producción</th>
+                    <th>Costos Variables</th>
+                    <th>Precio de Venta</th>
+                    <th>Rentabilidad</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="cost-history-body"></tbody>
+        </table>
+        <br>
+        <button id="download-excel-btn" class="btn-primary">Descargar Costos</button>
+        
+    </div>
+</div>
+
+
+    
+<!-- Modal para agregar producto -->
+<div id="add-product-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Agregar Nuevo Producto</h2>
+        <div class="form-group">
+            <label>Colegio:</label>
+            <select id="new-colegio" class="form-control">
+                <option value="">Seleccionar Colegio</option>
+                <!-- Las opciones se llenarán dinámicamente -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Categoria:</label>
+            <select id="new-tipo" class="form-control">
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Prenda:</label>
+            <input type="text" id="new-prenda" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Talla:</label>
+            <select id="new-talla" class="form-control">
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Cantidad:</label>
+            <input type="number" id="new-cantidad" class="form-control">
+        </div>
+        <div class="modal-buttons">
+            <button id="save-product-btn" class="btn-primary">Guardar</button>
+            <button class="btn-secondary modal-close">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agregar colegio -->
+<div id="add-colegio-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Agregar Nuevo Colegio</h2>
+        <div class="form-group">
+            <label>Nombre del Colegio:</label>
+            <input type="text" id="new-colegio-name" class="form-control">
+        </div>
+        <div class="modal-buttons"> 
+            <button id="save-colegio-btn" class="btn-primary">Guardar</button>
+            <button class="btn-secondary modal-close">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Detalles del Producto -->
+<div id="product-details-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Detalles del Producto</h2>
+        <div class="form-group">
+            <label>Producto:</label>
+            <span id="modal-product-name"></span>
+        </div>
+        <div class="form-group">
+            <label>Colegio:</label>
+            <span id="modal-colegio"></span>
+        </div>
+        <div class="form-group">
+            <label>Categoría:</label>
+            <span id="modal-categoria"></span>
+        </div>
+        <div class="form-group">
+            <label>Talla:</label>
+            <span id="modal-talla"></span>
+        </div>
+        <div class="form-group">
+            <label>Cantidad Actual:</label>
+            <span id="modal-cantidad"></span>
+        </div>
+        
+        <div class="modal-buttons">
+            <button id="open-update-modal" class="btn-primary">Actualizar Stock</button>
+            <button id="open-delete-modal" class="btn-tertiary">Eliminar Producto</button>
+            <button class="btn-secondary modal-close">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para actualizar stock -->
+<div id="update-stock-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Actualizar Stock</h2>
+        <div class="form-group">
+            <label>Colegio:</label>
+            <select id="update-colegio" class="form-control">
+                <option value="">Seleccionar Colegio</option>
+                <!-- Las opciones se llenarán dinámicamente -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Categoría:</label>
+            <select id="update-tipo" class="form-control">
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Prenda:</label>
+            <input type="text" id="update-prenda" class="form-control" placeholder="Escribe el nombre de la prenda">
+            <div id="suggestions-container" class="suggestions"></div> <!-- Contenedor para sugerencias -->
+        </div>
+        <div class="form-group">
+            <label>Talla:</label>
+            <select id="update-talla" class="form-control">
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Cantidad:</label>
+            <input type="number" id="update-cantidad" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Tipo de Movimiento:</label>
+            <div class="radio-group">
+                <input type="radio" name="tipo-mov" value="ENTRADA" > Entrada
+                <input type="radio" name="tipo-mov" value="SALIDA"> Salida
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <button id="save-update-btn" class="btn-primary">Actualizar</button>
+            <button class="btn-secondary modal-close">Cancelar</button>
+        </div>
+    </div>
+</div>
+    
+<div id="delete-confirm-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Está seguro que desea eliminar este producto del inventario?</p>
+        <div class="product-details">
+            <p><strong>Colegio:</strong> <span id="delete-colegio"></span></p>
+            <p><strong>Categoria:</strong> <span id="delete-tipo"></span></p>
+            <p><strong>Prenda:</strong> <span id="delete-prenda"></span></p>
+            <p><strong>Talla:</strong> <span id="delete-talla"></span></p>
+        </div>
+        <div class="modal-buttons">
+            <button id="confirm-delete-btn" class="btn-primary">Eliminar</button>
+            <button class="btn-secondary modal-close">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Añadir sección de reportes -->
+<div id="reports-container" class="container hidden scrollable-container">
+    <div class="menu-bar">
+        <div class="left-menu">
+            <button id="back-to-inventory-from-reports" class="btn-primary">Volver al menu</button>
+        </div>
+        <button id="logout-from-reports" class="grid-button">
+            <img src="images/logout.png" alt="Cerrar Sesión">
+            <br>
+            <span>Cerrar Sesión</span>
+        </button>
+    </div>
+    
+    <h2>Reportes Semanales</h2>
+    
+    <div class="report-settings">
+        <div class="form-group">
+            <label for="report-day">Día de generación de reportes:</label>
+            <select id="report-day" class="form-control">
+                <option value="0">Domingo</option>
+                <option value="1">Lunes</option>
+                <option value="2">Martes</option>
+                <option value="3">Miércoles</option>
+                <option value="4">Jueves</option>
+                <option value="5">Viernes</option>
+                <option value="6">Sábado</option>
+            </select>
+        </div>
+        <button id="generate-report-btn" class="btn-primary">Generar Reporte Manual</button>
+    </div>
+
+    <div class="report-history">
+        <h3>Historial de Reportes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha Reporte</th>
+                    <th>Inventario Total</th>
+                    <th>Prod. Añadidos</th>
+                    <th>Prod. Retirados</th>
+                    <th>Descargar/Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="report-history-body"></tbody>
+        </table>
+    </div>
+</div>
+<!-- Modal para Detalles del Reporte -->
+<div id="report-details-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>¿Descargar reporte?</h2>
+        <div id="details-content" class="product-details"></div>
+        <div class="modal-buttons">
+            <button id="download-report-btn" class="btn-primary">Descargar Reporte</button>
+            <button class="btn-secondary modal-close">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
