@@ -1,0 +1,1 @@
+Aplicativo para la gestion y control de inventarios de la empresa Uniformes Ritmichell, controla los costos y gastos de produccion, tiene diferentes perfiles acorde al cliente y diferentes funciones para el manejo del inventario.
